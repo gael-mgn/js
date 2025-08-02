@@ -32,7 +32,7 @@ window.onload = () => {
         formattedParams = formattedParams.slice(0, -1); // Supprime dernier saut de ligne
       }
 
-      googleSheets([domain, path, referrer, isMobile, formattedParams], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", domain, true);
+      googleSheets([domain + path, referrer, isMobile, formattedParams], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", domain, true);
     }
   }, 4000); // délai 4 secondes après le chargement complet
 };
