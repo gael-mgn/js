@@ -1,4 +1,5 @@
 import { googleSheets } from 'https://gael-mgn.github.io/js/google-sheets.js';
+const ID_Sheet = "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8";
 
 window.onload = () => {
   setTimeout(() => {
@@ -10,15 +11,56 @@ window.onload = () => {
       console.log("Bot détecté, script non exécuté");
       return; // On sort, pas d'exécution
     }
-
     if (location.protocol === "file:") {
       console.log("Exécuté en local (file://)");
-    } else if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+      return;
+    }
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
       console.log("Exécuté en local (localhost)");
-    } else {
+      return;
+
+    }
+
+      async function log(values, domain) {
+  const payload = {
+    spreadsheetId: ID_Sheet,
+    sheetName: domain,
+    values: values,
+    domain : domain
+  };
+
+  const data = encodeURIComponent(JSON.stringify(payload));
+  const body = `data=${data}`;
+
+  const url = 'https://script.google.com/macros/s/AKfycbyq6stZmJl647PdI2d0KYkQREC5df8k3kNiqjIOfmAz6Ud87iQ75dV70YCcnswTvvlZ/exec';
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: body
+    });
+
+    const text = await res.text();
+    console.log('Réponse du script :', text);
+    return text;
+  } catch (err) {
+    console.error('Erreur lors de l\'envoi :', err);
+    return null;
+  }
+}
+
+  //import { googleSheets } from 'https://gael-mgn.github.io/js/google-sheets.js';
+  
+
+
+
       console.log("Exécuté depuis Internet");
       const domain = window.location.hostname;
       const path = window.location.pathname;       // Chemin après le domaine (ex: /page1/test)
+      let adresse = 
       const isMobile = /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop";
       const referrer = document.referrer;
 
@@ -32,7 +74,13 @@ window.onload = () => {
         formattedParams = formattedParams.slice(0, -1); // Supprime dernier saut de ligne
       }
 
-      googleSheets([domain + path, referrer, isMobile, formattedParams], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", domain, true);
-    }
+      if (!referrer.includes(domain)) {
+          log([domain + path, referrer, isMobile, formattedParams], domain);
+      }
+      else {
+        googleSheets([domain + path, referrer, isMobile, formattedParams], ID_Sheet, domain, true);
+      }
+      //
+    
   }, 4000); // délai 4 secondes après le chargement complet
 };
