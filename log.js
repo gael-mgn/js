@@ -34,5 +34,5 @@ window.onload = () => {
 
       googleSheets([domain, path, referrer, isMobile, formattedParams], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", domain, true);
     }
-  }, 3000); // délai 3 secondes après le chargement complet
+  }, 4000); // délai 4 secondes après le chargement complet
 };
