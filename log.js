@@ -63,6 +63,9 @@ window.onload = () => {
       const isMobile = /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop";
       const referrer = document.referrer;
 
+      const iframe = (window.top !== window.self) ? "-iframe" : "";
+
+
       // Récupérer les paramètres de l'URL après le "?"
       const urlParams = new URLSearchParams(window.location.search);
       let formattedParams = "";
@@ -74,7 +77,7 @@ window.onload = () => {
       }
 
       if (!referrer.includes(domain)) {
-          log([domain + path, referrer, isMobile, formattedParams], domain);
+          log([domain + path, referrer, isMobile + iframe, formattedParams], domain);
       }
       else {
         googleSheets([domain + path, referrer, isMobile, formattedParams], ID_Sheet, domain, true);
