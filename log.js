@@ -1,6 +1,16 @@
 import { googleSheets } from 'https://gael-mgn.github.io/js/google-sheets.js';
 
 document.addEventListener('DOMContentLoaded', function () {
+
+  // Détection de rebots
+  const ua = navigator.userAgent.toLowerCase();
+  const bots = ["googlebot", "bingbot", "slurp", "duckduckbot", "baiduspider", "yandexbot", "facebot", "ia_archiver"];
+  const isBot = bots.some(bot => ua.includes(bot));
+  if (isBot) {
+    console.log("Bot détecté, script non exécuté");
+    return; // On sort, pas d'exécution
+  }
+
   if (location.protocol === "file:") {
     console.log("Exécuté en local (file://)");
   } else if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
