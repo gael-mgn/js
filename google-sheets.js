@@ -9,7 +9,7 @@
   const data = encodeURIComponent(JSON.stringify(payload));
   const body = `data=${data}`;
 
-  const url = 'https://script.google.com/macros/s/AKfycbyoExezkycvbaXYS2rT6TI_oFfHNcVrs1aWZuzFhwvdDDTgYqK0_xj_8Vy-QjSTvO4/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbxbmFfS3x79tVT5sGyn4WFRI31lfEIacKXa43BAGxEPVj0uG4AQvOd8Q62_UHs4VjI/exec';
 
   try {
     const res = await fetch(url, {
