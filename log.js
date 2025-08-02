@@ -1,21 +1,17 @@
-    import { googleSheets } from 'https://gael-mgn.github.io/js/google-sheets.js';
-    document.addEventListener('DOMContentLoaded', function () {
+import { googleSheets } from 'https://gael-mgn.github.io/js/google-sheets.js';
 
-    
-    googleSheets(["valeur 1", "valeur 2"], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", "feuille");
-
-
+document.addEventListener('DOMContentLoaded', function () {
   if (location.protocol === "file:") {
-      console.log("Exécuté en local (file://)");
-    } else if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-      console.log("Exécuté en local (localhost)");
-    } else {
-      console.log("Exécuté depuis Internet");
-      const domain = window.location.hostname;
-      const path = window.location.pathname;       // Chemin après le domaine (ex: /page1/test)
-      googleSheets([domain, path], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", domain);
+    console.log("Exécuté en local (file://)");
+  } else if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    console.log("Exécuté en local (localhost)");
+  } else {
+    console.log("Exécuté depuis Internet");
+    const domain = window.location.hostname;
+    const path = window.location.pathname;       // Chemin après le domaine (ex: /page1/test)
+    googleSheets([domain, path], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", domain);
     }
-  });
+});
 
 /*async function log() {
 
