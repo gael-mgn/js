@@ -1,14 +1,15 @@
-export async function googleSheets(values, spreadsheetId, sheetName) {
+  export async function googleSheets(values, spreadsheetId, sheetName, date = false) {
   const payload = {
     spreadsheetId: spreadsheetId,
     sheetName: sheetName,
-    values: values
+    values: values,
+    addDate : date
   };
 
   const data = encodeURIComponent(JSON.stringify(payload));
   const body = `data=${data}`;
 
-  const url = 'https://script.google.com/macros/s/AKfycbwi4c1mTGs88cuu7Sj-43E3iAkh8kUCTWv9kTDxvpYxCT8H8rB7GpGtZiOE77I0Lwc/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbyoExezkycvbaXYS2rT6TI_oFfHNcVrs1aWZuzFhwvdDDTgYqK0_xj_8Vy-QjSTvO4/exec';
 
   try {
     const res = await fetch(url, {
@@ -28,6 +29,41 @@ export async function googleSheets(values, spreadsheetId, sheetName) {
   }
 }
 
+// Exemple //
+/*const valeurs = ["aaaaa", "valeur 1", "valeurs 2", "..."];
+const sheetId = "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8";
+googleSheets(valeurs, sheetId, "Feuille 1", true);*/
+/*export async function googleSheets(values, spreadsheetId, sheetName, date = false) {
+  const payload = {
+    spreadsheetId: spreadsheetId,
+    sheetName: sheetName,
+    values: values,
+    addDate: date
+  };
+
+  const data = encodeURIComponent(JSON.stringify(payload));
+  const body = `data=${data}`;
+
+  const url = 'https://script.google.com/macros/s/AKfycbyPLvXywUlryG-BlVVgG4Od6FyWtwjUsPZJjws4fAHCGMSVkKah0Y0yfX3nsxBVDQ/exec';
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: body
+    });
+
+    const text = await res.text();
+    console.log('Réponse du script :', text);
+    return text;
+  } catch (err) {
+    console.error('Erreur lors de l\'envoi :', err);
+    return null;
+  }
+}
+*/
 /*// Exemple //
 const valeurs = ["valeur 1", "valeurs 2", "..."];
 const sheetId = "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8";
