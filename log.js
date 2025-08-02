@@ -60,7 +60,6 @@ window.onload = () => {
       console.log("Exécuté depuis Internet");
       const domain = window.location.hostname;
       const path = window.location.pathname;       // Chemin après le domaine (ex: /page1/test)
-      let adresse = 
       const isMobile = /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop";
       const referrer = document.referrer;
 
