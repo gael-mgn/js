@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("Exécuté depuis Internet");
     const domain = window.location.hostname;
     const path = window.location.pathname;       // Chemin après le domaine (ex: /page1/test)
-    googleSheets([domain, path], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", domain);
+    googleSheets([domain, path], "11cwEfj8x5KkiX9z5081IN25xVCUD49bIaP0ltizI6l8", domain, true);
     }
 });
 
