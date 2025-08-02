@@ -32,7 +32,7 @@ window.onload = () => {
   const data = encodeURIComponent(JSON.stringify(payload));
   const body = `data=${data}`;
 
-  const url = 'https://script.google.com/macros/s/AKfycbyq6stZmJl647PdI2d0KYkQREC5df8k3kNiqjIOfmAz6Ud87iQ75dV70YCcnswTvvlZ/exec';
+  const url = 'https://script.google.com/macros/s/AKfycby2DnL2yQn5__5wju4jREvkh6inrDquNVZE0zcXnsgtNqKtlaRSnWXCiHuY5w7_lGCf/exec';
 
   try {
     const res = await fetch(url, {
