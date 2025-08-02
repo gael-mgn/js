@@ -80,7 +80,7 @@ window.onload = () => {
           log([domain + path, referrer, isMobile + iframe, formattedParams], domain);
       }
       else {
-        googleSheets([domain + path, referrer, isMobile, formattedParams], ID_Sheet, domain, true);
+        googleSheets([domain + path, referrer, isMobile + iframe, formattedParams], ID_Sheet, domain, true);
       }
       //
     
