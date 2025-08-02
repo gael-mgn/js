@@ -1,4 +1,4 @@
-async function googleSheets(values, spreadsheetId, sheetName) {
+export function googleSheets(values, spreadsheetId, sheetName) {
   const payload = {
     spreadsheetId: spreadsheetId,
     sheetName: sheetName,
