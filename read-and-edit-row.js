@@ -36,6 +36,25 @@ async function updateRow(spreadsheetId, sheetName, targetId, newValues) {
 /*
 const SPREADSHEET_ID = "1sVCmgprkNQLroXlowU-Rp0PlUySAFZ331x3H5t3VT7A"; // ton ID Google Sheet
 
+
+getRowData(spreadsheetId, "users", "ID")
+  .then(data => {
+    if (data["error"] == "ID introuvable") {
+      console.log("Utilisateur non inscrit");
+      return;
+    }
+    if (data["password"] != cookie_password) {
+         console.log("le mot de passe ne correspond pas !", cookie_password, data["password"]);
+         return;
+    }
+    console.log("Connexion réussie !");
+    console.log("User:", data);
+    loginBtn.textContent = data["pseudo"];    // Affiche "Gaël"
+        loginBtn.href = "me.html";      // Redirige vers le profil
+  })
+  .catch(err => console.error("Erreur :", err));
+
+
 (async () => {
   // Lire
   const ligne = await getRowById(SPREADSHEET_ID, "users", "gael.maignan@eivp-paris.fr");
