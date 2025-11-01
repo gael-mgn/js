@@ -1,4 +1,4 @@
-const webAppUrl = "https://script.google.com/macros/s/AKfycbwOpW1Ez58xlT_yzfcxadhl5Yk6ymiS4O2fwdtb-BFmqIdOYrYRPaNf_4inQ3PbiUs/exec";
+const webAppUrl = "https://script.google.com/macros/s/AKfycbyPH93bH0QZ1hr-3lEzgAGo_1t1_PDn7QFcNrWVLjmvzLmygXR25XQUe4xq1b8qY-g/exec";
 
 async function getRowData(spreadsheetId, sheetName, targetId) {
   const url = `${webAppUrl}?spreadsheetId=${spreadsheetId}&sheetName=${sheetName}&targetId=${encodeURIComponent(targetId)}`;
