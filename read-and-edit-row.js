@@ -1,5 +1,5 @@
 // ⚙️ Paramètres
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby1Q5TYWvMght0eKidd9M5g92-yJgjsKeYGk0_1j4CKcAqo1SkyuN5UW2U1jd_8VcTr/exec"; // ton URL
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxj7jon9Xj0PyD5iJWXbWks1iGIs0owyvh2H1aMHGsS4nDUGtjXRZja02r1AILzylls/exec"; // ton URL
 
 // 🔍 Récupérer une ligne par ID
 async function getRowById(spreadsheetId, sheetName, targetId) {
@@ -33,28 +33,66 @@ async function updateRow(spreadsheetId, sheetName, targetId, newValues) {
   return result;
 }
 
+
+
+// ⚙️ Paramètres (votre WEB_APP_URL existant)
+
+// ➕ Ajouter une nouvelle ligne
+// newRowObj : objet { "ID": "...", "Nom": "...", "Email": "...", ... }
+// si vous ne fournissez pas la colonne ID (première colonne), le serveur générera un UUID
+async function addRow(spreadsheetId, sheetName, newRowObj) {
+  const params = new URLSearchParams({
+    spreadsheetId,
+    sheetName,
+    action: 'append'
+  });
+
+  const url = `${WEB_APP_URL}?${params.toString()}`;
+
+  // Si vous avez besoin du proxy CORS (comme pour updateRow), gardez la même logique.
+  const proxyPrefix = "https://cors-anywhere-t7kn.onrender.com/"; // votre proxy
+  const response = await fetch(proxyPrefix + url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newRowObj)
+  });
+
+  const result = await response.json();
+  console.log("append result:", result);
+  return result; // { success: true, action: 'append', row: N, id: 'uuid' }
+}
+
+
+
+
+
+async function deleteRow(spreadsheetId, sheetName, targetId) {
+  const params = new URLSearchParams({
+    spreadsheetId,
+    sheetName,
+    action: 'delete',
+    targetId
+  });
+
+  const url = `${WEB_APP_URL}?${params.toString()}`;
+
+  const proxyPrefix = "https://cors-anywhere-t7kn.onrender.com/";
+  const response = await fetch(proxyPrefix + url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({})
+  });
+
+  const result = await response.json();
+  console.log("delete result:", result);
+  return result;
+}
+
+
+
+
+
 /*
-const SPREADSHEET_ID = "1sVCmgprkNQLroXlowU-Rp0PlUySAFZ331x3H5t3VT7A"; // ton ID Google Sheet
-
-
-getRowData(spreadsheetId, "users", "ID")
-  .then(data => {
-    if (data["error"] == "ID introuvable") {
-      console.log("Utilisateur non inscrit");
-      return;
-    }
-    if (data["password"] != cookie_password) {
-         console.log("le mot de passe ne correspond pas !", cookie_password, data["password"]);
-         return;
-    }
-    console.log("Connexion réussie !");
-    console.log("User:", data);
-    loginBtn.textContent = data["pseudo"];    // Affiche "Gaël"
-        loginBtn.href = "me.html";      // Redirige vers le profil
-  })
-  .catch(err => console.error("Erreur :", err));
-
-
 (async () => {
   // Lire
   const ligne = await getRowById(SPREADSHEET_ID, "users", "gael.maignan@eivp-paris.fr");
@@ -62,9 +100,11 @@ getRowData(spreadsheetId, "users", "ID")
   
   // Modifier
   if (ligne && !ligne.error) {
-    ligne.password = "Nouvelle valeur3";
+    //ligne.password = "Nouvelle valeur2";
     await updateRow(SPREADSHEET_ID, "users", "gael.maignan@eivp-paris.fr", ligne);
   }
-})();
+  await addRow(SPREADSHEET_ID, "users", {email:"test@gael-maignan.fr", pseudo:"gael", password:"abc"});
 
+  await deleteRow(SPREADSHEET_ID, "users", "contact2@gael-maignan.fr")
+})();
 */
